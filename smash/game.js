@@ -568,8 +568,22 @@
   $("tabRomance").addEventListener("click", function () { setTab("romance"); });
 
   // flow
+  // 9 characters per round + lav = 10 cards. ones she hasn't seen yet are much more likely.
+  var PER_ROUND = 9;
+  function pickRound() {
+    var seen = {};
+    try { seen = JSON.parse(localStorage.getItem("smash-seen") || "{}") || {}; } catch (e) {}
+    var picks = chars.map(function (c) {
+      var w = 1 / (1 + 4 * (seen[c.img] || 0));
+      return { c: c, k: Math.pow(Math.random(), 1 / w) };
+    }).sort(function (a, b) { return b.k - a.k; }).slice(0, PER_ROUND).map(function (p) { return p.c; });
+    picks.forEach(function (c) { seen[c.img] = (seen[c.img] || 0) + 1; });
+    try { localStorage.setItem("smash-seen", JSON.stringify(seen)); } catch (e) {}
+    return shuffle(picks);
+  }
+
   function start() {
-    deck = shuffle(chars.slice()).concat([{ img: lavCard.img, isLav: true }]);
+    deck = pickRound().concat([{ img: lavCard.img, isLav: true }]);
     idx = 0; smashed = []; passed = []; busy = false;
     if (lav) stopFlying();
     lav = { passTries: 0, smashTries: 0, flying: false, zooming: false, done: false, ignoreClick: false };
