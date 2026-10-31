@@ -88,10 +88,10 @@ body {
 .back .door { fill: color-mix(in oklab, var(--background) 80%, var(--spook)); stroke: var(--spook); stroke-width: 1.2; }
 .card:hover:not(.up) .stone { stroke: var(--accent); }
 
-.front { transform: rotateY(180deg); background: var(--foreground); padding: 7% 7% 22%;
+.front { transform: rotateY(180deg); background: var(--foreground); padding: 4% 4% 10%;
   box-shadow: 0 4px 14px color-mix(in oklab, var(--background) 80%, transparent); }
 .front .pic { position: relative; width: 100%; height: 100%; overflow: hidden; background: var(--card); border-radius: 2px; }
-.front img { width: 100%; height: 100%; object-fit: cover; display: block; pointer-events: none; -webkit-user-drag: none; }
+.front img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 40%; display: block; pointer-events: none; -webkit-user-drag: none; }
 .front .num { position: absolute; inset: 0; display: none; place-items: center; color: var(--primary); font-size: 1.4rem; }
 .front .pic.noimg img { display: none; }
 .front .pic.noimg .num { display: grid; }
@@ -124,15 +124,15 @@ body {
 .score { margin: 0 0 10px; color: var(--muted-foreground); font-size: .7rem; letter-spacing: .12em; min-height: 1em; }
 .fan { position: relative; width: min(100%, 560px); height: min(44vh, 360px); margin-bottom: 7vh; }
 .fan .pol { position: absolute; left: 50%; bottom: 0; width: var(--pw, 130px); margin-left: calc(var(--pw, 130px) / -2);
-  background: var(--foreground); padding: calc(var(--pw, 130px) * .07) calc(var(--pw, 130px) * .07) calc(var(--pw, 130px) * .24); border-radius: 3px; transform-origin: 50% 170%;
+  background: var(--foreground); padding: calc(var(--pw, 130px) * .05) calc(var(--pw, 130px) * .05) calc(var(--pw, 130px) * .14); border-radius: 3px; transform-origin: 50% 170%;
   box-shadow: 0 6px 18px color-mix(in oklab, var(--background) 85%, transparent), 0 0 14px color-mix(in oklab, var(--primary) 30%, transparent);
   transform: rotate(0deg) scale(.6); opacity: 0;
   transition: transform .9s cubic-bezier(.2,.8,.2,1.15), opacity .5s; transition-delay: calc(var(--i) * 70ms); }
 .fan.open .pol { transform: rotate(var(--a)) translateY(var(--y, 0)); opacity: 1; }
-.fan .pol img { width: 100%; aspect-ratio: 1; height: auto; object-fit: cover; display: block; background: var(--card); }
+.fan .pol img { width: 100%; aspect-ratio: 4 / 3; height: auto; object-fit: cover; display: block; background: var(--card); }
 .fan .pol .num { display: none; }
 .fan .pol.noimg img { display: none; }
-.fan .pol.noimg .num { display: grid; place-items: center; aspect-ratio: 1; background: var(--card); color: var(--primary); }
+.fan .pol.noimg .num { display: grid; place-items: center; aspect-ratio: 4 / 3; background: var(--card); color: var(--primary); }
 
 @media (prefers-reduced-motion: reduce) {
   .fog { animation: none; }

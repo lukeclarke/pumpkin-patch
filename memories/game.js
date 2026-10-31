@@ -86,14 +86,14 @@
   document.addEventListener("keydown", initAudio, { once: true });
 
   // card backs
-  var GRASS = "M0 80V74q3-6 5 0q3-7 5 0q2-5 5 0q3-7 5 0q3-6 5 0q2-7 5 0q3-5 5 0q3-7 5 0q2-6 5 0q3-7 5 0q3-5 5 0q2-6 5 0V80Z";
+  var GRASS = "M0 60V56q2-3 5 0q2-4 5 0q2-3 5 0q2-4 5 0q2-3 5 0q2-4 5 0q2-3 5 0q2-4 5 0q2-3 5 0q2-4 5 0q2-3 5 0q2-4 5 0q2-3 5 0q2-4 5 0q2-3 5 0q2-4 5 0V60Z";
   var BACKS = [
-    '<path class="stone" d="M8 76V30a22 22 0 0 1 44 0v46Z"/><path class="etch" d="M30 20v18M23 27h14M18 50h24M21 57h18"/>',
-    '<path class="stone" d="M12 76V42h12V30h-8v-9h8V10h12v11h8v9h-8v12h12v34Z"/><path class="etch" d="M18 54h24M21 61h18"/>',
-    '<path class="stone" d="M6 76V27L30 9l24 18v49Z"/><path class="door" d="M18 76V46a12 12 0 0 1 24 0v30Z"/><path class="etch" d="M30 34v42"/><circle class="glow" cx="34" cy="60" r="1.6"/><circle class="glow" cx="26" cy="60" r="1.6"/>'
+    '<path class="stone" d="M10 56V30a30 20 0 0 1 60 0v26Z"/><path class="etch" d="M40 16v16M33 22h14M24 40h32M29 47h22"/>',
+    '<path class="stone" d="M6 31L18 17h48l8 14l-8 14H18Z"/><path class="etch" d="M30 31h20M38 24v14M22 31h3M55 31h3"/>',
+    '<path class="stone" d="M12 56V26h56v30Z"/><path class="stone" d="M7 26L40 8l33 18Z"/><path class="door" d="M30 56V40a10 10 0 0 1 20 0v16Z"/><path class="etch" d="M40 30v26M18 30v24M62 30v24"/><circle class="glow" cx="43.5" cy="46" r="1.4"/><circle class="glow" cx="36.5" cy="46" r="1.4"/>'
   ];
   function backSVG(i) {
-    return '<svg viewBox="0 0 60 80" aria-hidden="true">' + BACKS[i % BACKS.length] + '<path class="grass" d="' + GRASS + '"/></svg>';
+    return '<svg viewBox="0 0 80 60" aria-hidden="true">' + BACKS[i % BACKS.length] + '<path class="grass" d="' + GRASS + '"/></svg>';
   }
 
   // state
@@ -147,15 +147,15 @@
     var gap = W < 500 ? 8 : 12, best = null;
     for (var c = 2; c <= n; c++) {
       var r = Math.ceil(n / c);
-      var cw = Math.min((W - gap * (c - 1)) / c, ((H - gap * (r - 1)) / r) * 0.75);
+      var cw = Math.min((W - gap * (c - 1)) / c, ((H - gap * (r - 1)) / r) * 4 / 3);
       var score = cw * (r * c === n ? 1 : 0.9);
       if (!best || score > best.score) best = { c: c, cw: cw, score: score };
     }
     cols = best.c;
-    var cw2 = Math.max(30, Math.min(best.cw, 150));
+    var cw2 = Math.max(30, Math.min(best.cw, 280));
     deck.style.setProperty("--gap", gap + "px");
     deck.style.setProperty("--cw", cw2 + "px");
-    deck.style.setProperty("--ch", cw2 / 0.75 + "px");
+    deck.style.setProperty("--ch", cw2 * 0.75 + "px");
     deck.style.setProperty("--dw", cw2 * cols + gap * (cols - 1) + 1 + "px");
   }
   window.addEventListener("resize", layout);
@@ -253,8 +253,8 @@
     fan.innerHTML = "";
     var n = photos.length;
     var W = fan.clientWidth || 320;
-    var pw = Math.min(180, W * 0.36, (fan.clientHeight || 300) * 0.7);
-    var h = pw * 1.17, pivot = h * 1.7;
+    var pw = Math.min(230, W * 0.44, (fan.clientHeight || 300) * 0.95);
+    var h = pw * 0.96, pivot = h * 1.7;
     var maxHalf = Math.asin(Math.max(0, Math.min(1, (W / 2 - pw / 2) / pivot))) * 180 / Math.PI;
     var spread = Math.min(n * 13, 110, maxHalf * 2);
     photos.forEach(function (src, i) {

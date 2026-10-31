@@ -1,14 +1,14 @@
-// The card photos. To use real ones: drop them in the photos/ folder
-// (jpg, png or webp all work) and list them below, one per pair.
-// 6 to 12 photos works best. Square-ish crops look nicest, but
-// anything is fine since the cards crop to fit.
+// The card photos, one per pair. Put them in photos/ and list them here.
+// 6 to 12 works best. Cards are wide (4:3), so landscape shots fit nicest.
 window.PHOTOS = [
-  "photos/01.svg",
-  "photos/02.svg",
-  "photos/03.svg",
-  "photos/04.svg",
-  "photos/05.svg",
-  "photos/06.svg",
-  "photos/07.svg",
-  "photos/08.svg"
+  "photos/01.jpg",
+  "photos/02.jpg",
+  "photos/03.jpg",
+  "photos/04.jpg",
+  "photos/05.jpg",
+  "photos/06.jpg",
+  "photos/07.jpg",
+  "photos/08.jpg",
+  "photos/09.jpg",
+  "photos/10.jpg"
 ];
