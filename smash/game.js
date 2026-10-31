@@ -6,20 +6,6 @@
 
   var CLASSIC = ["danger", "charm", "mystery", "brains", "brawn", "chaos"];
   var ROMANCE = ["toxic", "loyal", "dramatic", "clingy", "mysterious", "fun"];
-  var VERDICTS = {
-    danger: "you like them a little bit murdery.",
-    charm: "a smooth talker could get away with anything. literally.",
-    mystery: "you want someone you'll never fully figure out.",
-    brains: "big brain energy is your love language.",
-    brawn: "you want someone who can carry you. and a coffin.",
-    chaos: "you're here for the plot twists, not the peace.",
-    toxic: "red flags look like party decorations to you.",
-    loyal: "you want someone who'd haunt only you.",
-    dramatic: "you want a cape, a monologue and a thunderstorm.",
-    clingy: "you like being followed. literally.",
-    mysterious: "the less they say, the harder you fall.",
-    fun: "you just want someone to scream-laugh with."
-  };
   var PLEADS = ["wait", "are you sure?", "angel pls", "i made you a whole website", "i'll share my candy", "think of the pumpkins"];
   var TAUNTS = ["too slow", "nope", "hehe", "nice try", "smash is right there", "not today", "so close"];
   var SMASH_TEASE = ["ooh, eager?", "make me work for it"];
@@ -515,7 +501,7 @@
     });
     var top = null;
     CLASSIC.concat(ROMANCE).forEach(function (k) { if (top === null || avg[k] > avg[top]) top = k; });
-    $("verdict").textContent = picks.length ? VERDICTS[top] : "only one ghoul for you. good answer.";
+    $("verdict").textContent = picks.length ? "ohhh. so you most like " + top + "? freak." : "only one ghoul for you. good answer.";
     setTab("classic");
     show("results");
   }
