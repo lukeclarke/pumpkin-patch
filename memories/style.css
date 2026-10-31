@@ -1,0 +1,146 @@
+html, body { height: 100%; overflow: hidden; }
+body {
+  overscroll-behavior: none;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+/* night sky, moon, fog */
+.night { position: fixed; inset: 0; pointer-events: none; overflow: hidden; z-index: 0;
+  background:
+    radial-gradient(ellipse 120% 60% at 50% 110%, color-mix(in oklab, var(--spook) 14%, transparent), transparent 70%),
+    linear-gradient(to bottom, color-mix(in oklab, var(--spook) 8%, var(--background)), var(--background) 55%);
+}
+.moon { position: absolute; top: 76px; right: 9vw; width: 64px; height: 64px; border-radius: 50%;
+  background: radial-gradient(circle at 38% 38%, var(--foreground), color-mix(in oklab, var(--foreground) 70%, var(--muted-foreground)));
+  box-shadow: 0 0 40px color-mix(in oklab, var(--foreground) 30%, transparent), 0 0 120px color-mix(in oklab, var(--spook) 30%, transparent);
+  opacity: .5;
+}
+.hills { position: absolute; left: -10%; right: -10%; bottom: 0; height: 22vh;
+  background:
+    radial-gradient(ellipse 40% 60% at 20% 100%, color-mix(in oklab, var(--card) 90%, var(--spook)) 60%, transparent 61%),
+    radial-gradient(ellipse 50% 50% at 75% 100%, var(--card) 60%, transparent 61%);
+  opacity: .9;
+}
+.fog { position: absolute; left: 0; width: 200%; height: 60%; opacity: .14;
+  background:
+    radial-gradient(ellipse 18% 40% at 10% 50%, var(--foreground), transparent 70%),
+    radial-gradient(ellipse 22% 30% at 32% 60%, var(--foreground), transparent 70%),
+    radial-gradient(ellipse 16% 35% at 60% 45%, var(--foreground), transparent 70%),
+    radial-gradient(ellipse 20% 30% at 85% 55%, var(--foreground), transparent 70%);
+  filter: blur(18px);
+  animation: drift 70s linear infinite;
+}
+.fog-a { bottom: -15%; }
+.fog-b { bottom: 20%; opacity: .07; animation-duration: 110s; animation-direction: reverse; }
+@keyframes drift { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+/* screens */
+.screen, .game { position: relative; z-index: 1; height: 100%; height: 100dvh; }
+.screen { display: flex; flex-direction: column; align-items: center; justify-content: center;
+  text-align: center; padding: 24px 16px; gap: 14px; }
+.intro h1 { font-size: clamp(2.4rem, 13vw, 4.5rem); margin: 0; color: var(--primary); line-height: 1; }
+.kicker { margin: 0; color: var(--spook); font-size: .8rem; letter-spacing: .3em; }
+.sub { margin: 0 0 18px; color: var(--muted-foreground); font-size: .85rem; }
+
+.btn { font: inherit; font-size: 1rem; color: var(--foreground); background: color-mix(in oklab, var(--card) 80%, transparent);
+  border-radius: var(--radius); padding: 12px 34px; cursor: pointer; transition: transform .15s, background .15s; }
+.btn:hover { background: color-mix(in oklab, var(--primary) 18%, var(--card)); }
+.btn:active { transform: scale(.96); }
+.btn:focus-visible, .icon-btn:focus-visible, .card:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+
+/* hud */
+.game { display: flex; flex-direction: column; padding: max(10px, env(safe-area-inset-top)) 16px max(12px, env(safe-area-inset-bottom)); }
+.hud { display: flex; align-items: center; gap: 18px; padding: 4px 2px 10px; }
+.stat { display: flex; flex-direction: column; line-height: 1.1; }
+.label { font-size: .55rem; color: var(--muted-foreground); letter-spacing: .2em; }
+.val { font-size: 1.05rem; color: var(--primary); font-variant-numeric: tabular-nums; min-width: 3ch; }
+.hud-btns { margin-left: auto; display: flex; gap: 8px; }
+.icon-btn { width: 42px; height: 42px; display: grid; place-items: center; padding: 0; cursor: pointer;
+  border: 2px solid var(--border); border-radius: var(--radius); background: color-mix(in oklab, var(--card) 85%, transparent); color: var(--foreground); }
+.icon-btn:hover { border-color: var(--primary); color: var(--primary); }
+.icon-btn svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+#mute .off { display: none; }
+#mute[aria-pressed="true"] .off { display: inline; }
+#mute[aria-pressed="true"] .on { display: none; }
+
+/* board */
+.board { flex: 1; min-height: 0; display: flex; align-items: center; justify-content: center; }
+.deck { display: flex; flex-wrap: wrap; justify-content: center; align-content: center; gap: var(--gap, 8px); width: var(--dw, 100%); }
+.deck .card { width: var(--cw, 70px); height: var(--ch, 94px); flex: none; }
+
+.card { position: relative; padding: 0; border: 0; background: none; cursor: pointer; perspective: 700px;
+  border-radius: var(--radius-sm); font: inherit; color: inherit; }
+.card .inner { position: absolute; inset: 0; transform-style: preserve-3d;
+  transition: transform .5s cubic-bezier(.3,.7,.3,1.2); }
+.card.up .inner { transform: rotateY(180deg); }
+.face { position: absolute; inset: 0; backface-visibility: hidden; -webkit-backface-visibility: hidden; border-radius: var(--radius-sm); }
+
+.back { display: block; }
+.back svg { width: 100%; height: 100%; display: block; overflow: visible; }
+.back .stone { fill: color-mix(in oklab, var(--card) 70%, var(--muted-foreground) 12%); stroke: var(--primary); stroke-width: 1.6;
+  filter: drop-shadow(0 0 3px color-mix(in oklab, var(--primary) 70%, transparent)); }
+.back .etch { fill: none; stroke: color-mix(in oklab, var(--muted-foreground) 70%, transparent); stroke-width: 1.4; stroke-linecap: round; }
+.back .grass { fill: color-mix(in oklab, var(--accent) 55%, var(--background)); }
+.back .glow { fill: var(--accent); opacity: .8; }
+.back .door { fill: color-mix(in oklab, var(--background) 80%, var(--spook)); stroke: var(--spook); stroke-width: 1.2; }
+.card:hover:not(.up) .stone { stroke: var(--accent); }
+
+.front { transform: rotateY(180deg); background: var(--foreground); padding: 7% 7% 22%;
+  box-shadow: 0 4px 14px color-mix(in oklab, var(--background) 80%, transparent); }
+.front .pic { position: relative; width: 100%; height: 100%; overflow: hidden; background: var(--card); border-radius: 2px; }
+.front img { width: 100%; height: 100%; object-fit: cover; display: block; pointer-events: none; -webkit-user-drag: none; }
+.front .num { position: absolute; inset: 0; display: none; place-items: center; color: var(--primary); font-size: 1.4rem; }
+.front .pic.noimg img { display: none; }
+.front .pic.noimg .num { display: grid; }
+
+.card.matched .front { box-shadow: 0 0 8px var(--accent), 0 0 22px color-mix(in oklab, var(--accent) 55%, transparent); }
+.card.matched { cursor: default; }
+.card.miss .front { box-shadow: 0 0 10px var(--destructive); }
+.card.matched .inner { animation: pop .5s .25s; }
+@keyframes pop { 50% { transform: rotateY(180deg) scale(1.08); } }
+.board.cheer .card .inner { animation: cheer .7s calc(var(--i) * 45ms) ease-in-out; }
+@keyframes cheer { 40% { transform: rotateY(180deg) translateY(-12%) scale(1.06); } }
+
+/* ghost puffs */
+.puffs { position: fixed; inset: 0; pointer-events: none; z-index: 5; }
+.puff { position: absolute; width: 14px; height: 17px; margin: -8px 0 0 -7px; border-radius: 50% 50% 30% 30%;
+  background: color-mix(in oklab, var(--foreground) 85%, var(--accent)); opacity: 0;
+  box-shadow: 0 0 10px color-mix(in oklab, var(--accent) 60%, transparent);
+  animation: puff .9s ease-out forwards; }
+.puff::before, .puff::after { content: ""; position: absolute; top: 35%; width: 2.5px; height: 3.5px; border-radius: 50%; background: var(--background); }
+.puff::before { left: 30%; } .puff::after { right: 30%; }
+@keyframes puff {
+  0% { opacity: 0; transform: translate(0,0) scale(.4); }
+  20% { opacity: .95; }
+  100% { opacity: 0; transform: translate(var(--dx), var(--dy)) scale(var(--s, 1)); }
+}
+
+/* win */
+.win { gap: 10px; }
+.win h2 { margin: 6px 0 0; color: var(--primary); font-size: clamp(1.1rem, 6vw, 1.7rem); text-transform: none; }
+.score { margin: 0 0 10px; color: var(--muted-foreground); font-size: .7rem; letter-spacing: .12em; min-height: 1em; }
+.fan { position: relative; width: min(100%, 560px); height: min(44vh, 360px); margin-bottom: 7vh; }
+.fan .pol { position: absolute; left: 50%; bottom: 0; width: var(--pw, 130px); margin-left: calc(var(--pw, 130px) / -2);
+  background: var(--foreground); padding: calc(var(--pw, 130px) * .07) calc(var(--pw, 130px) * .07) calc(var(--pw, 130px) * .24); border-radius: 3px; transform-origin: 50% 170%;
+  box-shadow: 0 6px 18px color-mix(in oklab, var(--background) 85%, transparent), 0 0 14px color-mix(in oklab, var(--primary) 30%, transparent);
+  transform: rotate(0deg) scale(.6); opacity: 0;
+  transition: transform .9s cubic-bezier(.2,.8,.2,1.15), opacity .5s; transition-delay: calc(var(--i) * 70ms); }
+.fan.open .pol { transform: rotate(var(--a)) translateY(var(--y, 0)); opacity: 1; }
+.fan .pol img { width: 100%; aspect-ratio: 1; height: auto; object-fit: cover; display: block; background: var(--card); }
+.fan .pol .num { display: none; }
+.fan .pol.noimg img { display: none; }
+.fan .pol.noimg .num { display: grid; place-items: center; aspect-ratio: 1; background: var(--card); color: var(--primary); }
+
+@media (prefers-reduced-motion: reduce) {
+  .fog { animation: none; }
+  .card .inner { transition: none; transform: none !important; animation: none !important; }
+  .card .face { transition: opacity .2s; backface-visibility: visible; -webkit-backface-visibility: visible; }
+  .card .front { transform: none; opacity: 0; }
+  .card.up .front { opacity: 1; }
+  .card.up .back { opacity: 0; }
+  .puff { display: none; }
+  .fan .pol { transition: opacity .4s; transition-delay: 0s; }
+}

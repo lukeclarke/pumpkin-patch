@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0a0708">
+<title>Smash or Pass</title>
+<link rel="stylesheet" href="../theme.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main class="app">
+
+  <section id="intro" class="screen intro">
+    <div class="fan" aria-hidden="true">
+      <img src="characters/02.jpg" alt="">
+      <img src="characters/10.jpg" alt="">
+      <img src="characters/12.jpg" alt="">
+    </div>
+    <h1 class="title neon-text">Smash<br><span>or</span><br>Pass</h1>
+    <p class="for" data-caps>for Angel</p>
+    <button id="startBtn" class="big-btn neon-border">Start</button>
+    <p class="hint">swipe or use the arrow keys</p>
+  </section>
+
+  <section id="play" class="screen play" hidden>
+    <div class="bar">
+      <div class="progress" aria-hidden="true"><span id="progFill"></span></div>
+      <span id="progText" class="count">1 / 13</span>
+    </div>
+    <div class="stage">
+      <div id="stack" class="stack"></div>
+      <div id="bubble" class="bubble" role="status" aria-live="polite"></div>
+    </div>
+    <div class="controls">
+      <div class="slot"><button id="passBtn" class="act pass" aria-label="Pass">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg><span>Pass</span>
+      </button></div>
+      <div class="slot"><button id="smashBtn" class="act smash" aria-label="Smash">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg><span>Smash</span>
+      </button></div>
+    </div>
+  </section>
+
+  <section id="results" class="screen results" hidden>
+    <h2 class="neon-text">Results</h2>
+
+    <div class="tally">
+      <div class="row">
+        <h3 class="smash-h">Smash <span id="smashCount"></span></h3>
+        <div id="smashRow" class="thumbs"></div>
+      </div>
+      <div class="row">
+        <h3 class="pass-h">Pass <span id="passCount"></span></h3>
+        <div id="passRow" class="thumbs"></div>
+      </div>
+    </div>
+
+    <div class="type">
+      <h3>Your type</h3>
+      <div class="tabs" role="tablist">
+        <button role="tab" id="tabClassic" aria-selected="true">Classic</button>
+        <button role="tab" id="tabRomance" aria-selected="false">Romance</button>
+      </div>
+      <svg id="radar" class="radar" viewBox="0 0 340 300" role="img" aria-label="your type chart"></svg>
+      <p id="verdict" class="verdict"></p>
+    </div>
+
+    <button id="againBtn" class="big-btn neon-border">Play again</button>
+  </section>
+
+</main>
+
+<div id="moment" class="moment" hidden>
+  <div class="moment-inner">
+    <div id="momentArt" class="moment-art"></div>
+    <p id="momentBig" class="moment-big"></p>
+    <p id="momentLine" class="moment-line"></p>
+    <button id="momentBtn" class="big-btn neon-border">Results</button>
+  </div>
+</div>
+
+<canvas id="fx" class="fx" aria-hidden="true"></canvas>
+
+<button id="muteBtn" class="mute" aria-label="Sound" aria-pressed="false">
+  <svg viewBox="0 0 24 24" aria-hidden="true"><path class="spk" d="M4 9v6h4l5 4V5L8 9z"/><path class="on" d="M16 9a4 4 0 0 1 0 6M18.5 6.5a8 8 0 0 1 0 11"/><path class="off" d="M16 9l5 6M21 9l-5 6"/></svg>
+</button>
+
+<script src="characters.js"></script>
+<script src="game.js"></script>
+</body>
+</html>

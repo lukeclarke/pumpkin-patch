@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400">
+<defs><radialGradient id="g" cx="50%" cy="45%" r="70%"><stop offset="0" stop-color="#8cff3a" stop-opacity=".35"/><stop offset="1" stop-color="#130e0f" stop-opacity="1"/></radialGradient></defs>
+<rect width="400" height="400" fill="#130e0f"/><rect width="400" height="400" fill="url(#g)"/>
+<path d="M130 290 v-110 a70 70 0 0 1 140 0 v110 l-23 -20 l-24 20 l-23 -20 l-24 20 l-23 -20z" fill="#f3e9dc"/>
+<ellipse cx="175" cy="185" rx="11" ry="16" fill="#130e0f"/><ellipse cx="225" cy="185" rx="11" ry="16" fill="#130e0f"/>
+<ellipse cx="200" cy="228" rx="12" ry="9" fill="#130e0f"/>
+<text x="30" y="370" font-family="sans-serif" font-size="44" fill="#8cff3a">02</text>
+<text x="370" y="370" text-anchor="end" font-family="sans-serif" font-size="22" fill="#a39489" letter-spacing="3">GHOST</text>
+</svg>

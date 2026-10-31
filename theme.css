@@ -1,0 +1,81 @@
+@import url("fonts/lavv.css");
+
+:root {
+  color-scheme: dark;
+  --font-lavv: "Lavv";
+  --font-sans: var(--font-lavv), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-lavv), ui-sans-serif, system-ui, sans-serif;
+
+  --background: #0a0708;
+  --foreground: #f3e9dc;
+  --card: #130e0f;
+  --card-foreground: #f3e9dc;
+  --popover: #130e0f;
+  --popover-foreground: #f3e9dc;
+  --primary: #ff6a00;
+  --primary-foreground: #0a0708;
+  --secondary: #1f1517;
+  --secondary-foreground: #f3e9dc;
+  --muted: #1f1517;
+  --muted-foreground: #a39489;
+  --accent: #8cff3a;
+  --accent-foreground: #0a0708;
+  --destructive: #ff3d2e;
+  --spook: #a35cff;
+  --border: #3a2214;
+  --input: #3a2214;
+  --ring: #ff6a00;
+
+  --radius: 0.75rem;
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+}
+
+*, *::before, *::after { box-sizing: border-box; border-color: var(--border); }
+:focus-visible { outline: 2px solid color-mix(in oklab, var(--ring) 50%, transparent); outline-offset: 2px; }
+
+html { font-size: 140%; height: 100%; }
+
+body {
+  margin: 0;
+  min-height: 100%;
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  background-image: radial-gradient(
+    ellipse at 50% -10%,
+    color-mix(in oklab, var(--primary) 14%, transparent),
+    transparent 60%
+  );
+  background-attachment: fixed;
+  letter-spacing: 0.02em;
+  font-synthesis: none;
+  -webkit-text-stroke: 0.035em currentColor;
+  paint-order: stroke fill;
+}
+
+* { font-weight: 400 !important; }
+
+h1, h2, h3, h4, h5, h6, button, label, legend, th, [role="tab"], [data-caps] {
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+input, textarea { text-transform: none; }
+
+.neon-border {
+  border: 3px solid var(--primary);
+  box-shadow:
+    0 0 6px var(--primary),
+    0 0 24px color-mix(in oklab, var(--primary) 70%, transparent),
+    inset 0 0 18px color-mix(in oklab, var(--primary) 35%, transparent);
+}
+.neon-text {
+  text-shadow:
+    0 0 6px color-mix(in oklab, var(--primary) 80%, transparent),
+    0 0 22px color-mix(in oklab, var(--primary) 60%, transparent);
+}
+
+[hidden] { display: none !important; }

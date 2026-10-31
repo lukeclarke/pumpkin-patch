@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0a0708">
+<title>Memories</title>
+<link rel="stylesheet" href="../theme.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="night" aria-hidden="true">
+  <div class="moon"></div>
+  <div class="fog fog-a"></div>
+  <div class="fog fog-b"></div>
+  <div class="hills"></div>
+</div>
+
+<section id="intro" class="screen intro">
+  <p class="kicker" data-caps>for angel</p>
+  <h1 class="neon-text">Memories</h1>
+  <p class="sub">find the pairs</p>
+  <button id="start" class="btn neon-border" type="button">Play</button>
+</section>
+
+<main id="game" class="game" hidden>
+  <header class="hud">
+    <div class="stat"><span class="label" data-caps>moves</span><span id="moves" class="val">0</span></div>
+    <div class="stat"><span class="label" data-caps>time</span><span id="time" class="val">0:00</span></div>
+    <div class="hud-btns">
+      <button id="mute" class="icon-btn" type="button" aria-label="Sound" aria-pressed="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path class="spk" d="M4 9h4l5-4v14l-5-4H4z"/><path class="on" d="M16 9a4 4 0 0 1 0 6M18.5 6.5a7.5 7.5 0 0 1 0 11"/><path class="off" d="M16 9l5 6M21 9l-5 6"/></svg>
+      </button>
+      <button id="restart" class="icon-btn" type="button" aria-label="Restart">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12a8 8 0 1 0 2.5-5.8M4 4v5h5"/></svg>
+      </button>
+    </div>
+  </header>
+  <div id="board" class="board" role="group" aria-label="Cards"></div>
+</main>
+
+<section id="win" class="screen win" hidden>
+  <div id="fan" class="fan" aria-hidden="true"></div>
+  <h2 class="neon-text">all yours, angel 🖤</h2>
+  <p id="score" class="score"></p>
+  <button id="again" class="btn neon-border" type="button">Again</button>
+</section>
+
+<script src="photos.js"></script>
+<script src="game.js"></script>
+</body>
+</html>

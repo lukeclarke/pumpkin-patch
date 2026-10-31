@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0a0708">
+<title>Tidy Up</title>
+<link rel="stylesheet" href="../theme.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="app">
+  <header class="hud">
+    <div class="hud-row">
+      <span class="chip" id="lvl" data-caps>1/5</span>
+      <span class="chip time" id="time">0:00</span>
+      <span class="spacer"></span>
+      <button class="icon-btn" id="hint" aria-label="Hint">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.2 6.3 6.3 2.2-6.3 2.2L12 19.5l-2.2-6.3L3.5 11l6.3-2.2z" fill="currentColor"/><circle cx="19" cy="19" r="1.6" fill="currentColor"/></svg>
+      </button>
+      <button class="icon-btn" id="mute" aria-label="Sound" aria-pressed="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9h4l5-4v14l-5-4H4z" fill="currentColor"/><path class="on" d="M16 8.5a5 5 0 0 1 0 7M18.5 6a8.5 8.5 0 0 1 0 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path class="off" d="M16 9l5 6M21 9l-5 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+    <div class="prompt" id="prompt">
+      <img id="pIcon" alt="">
+      <span id="pName" data-caps>candy corn</span>
+      <span id="pCount">4</span>
+    </div>
+  </header>
+  <main id="stage"><canvas id="cv"></canvas></main>
+</div>
+
+<div class="overlay" id="title">
+  <div class="card neon-border">
+    <div class="title-icons" id="titleIcons"></div>
+    <h1 class="neon-text">Tidy up,<br>Angel</h1>
+    <p>tap the one it asks for</p>
+    <button class="btn" id="start">Start</button>
+  </div>
+</div>
+
+<div class="overlay soft" id="done" hidden>
+  <div class="card neon-border">
+    <h2 class="neon-text">All tidy ✨</h2>
+    <div class="big" id="doneTime">0:00</div>
+    <p id="doneBest"></p>
+  </div>
+</div>
+
+<div class="finale" id="finale" hidden>
+  <div class="card neon-border">
+    <h2 class="neon-text">All tidy, Angel ✨</h2>
+    <div class="big" id="finTime">0:00</div>
+    <p id="finBest"></p>
+    <button class="btn" id="again">Again</button>
+  </div>
+</div>
+
+<script src="icons.js"></script>
+<script src="game.js"></script>
+</body>
+</html>
